@@ -1,6 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from 'react-router-dom';
+import routes from './routes';
+
+const router = createBrowserRouter(routes)
 
 function App() {
   const audioContext = useRef<AudioContext | null>(null);
@@ -48,9 +53,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App" onKeyDown={start} onKeyUp={stop}>
-      <div tabIndex={0} autoFocus onClick={setupAudio}>Start</div> 
-    </div>
+    <RouterProvider router={router} />
   );
 }
 
