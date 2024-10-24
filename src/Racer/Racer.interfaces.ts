@@ -7,6 +7,6 @@ export interface ITextViewerProps {
 };
 
 export interface IMorseKeyProps {
-    onMorseKeyDown: VoidFunction;
-    onMorseKeyUp: VoidFunction;
+    onMorseKeyDown: (e: React.KeyboardEvent<HTMLDivElement>) => void;
+    onMorseKeyUp: (e: React.KeyboardEvent<HTMLDivElement>) => void;
 };

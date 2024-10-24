@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IMorseKeyProps } from '../Racer.interfaces';
 
 const MorseKey: React.FC<IMorseKeyProps> = (props) => {
     const {
+        onMorseKeyDown,
         onMorseKeyUp,
     } = props;
+
     return (
         <div
             style={{
@@ -15,7 +17,8 @@ const MorseKey: React.FC<IMorseKeyProps> = (props) => {
                 cursor: 'pointer'
             }}
             autoFocus
-            tabIndex={0}
+            tabIndex={-1}
+            onKeyDown={onMorseKeyDown}
             onKeyUp={onMorseKeyUp}
         >
             PRESS
