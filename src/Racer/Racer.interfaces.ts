@@ -10,3 +10,7 @@ export interface IMorseKeyProps {
     onMorseKeyDown: (e: React.KeyboardEvent<HTMLDivElement>) => void;
     onMorseKeyUp: (e: React.KeyboardEvent<HTMLDivElement>) => void;
 };
+
+export interface IMorseDisplay {
+    morseBuffer: string;
+};
