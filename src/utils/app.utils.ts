@@ -15,7 +15,7 @@ export const getMorseCodeFromTime = (diffTime: number, baseTime: number, slopPer
         return '-';
     }
 
-    return 'N';
+    return '!';
 };
 
 export const getContextDataFromLocalstorage = () => {

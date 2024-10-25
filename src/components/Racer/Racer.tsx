@@ -1,7 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { baseTime, keyboardBinding, slopPercentage, text } from '../../constants/app.constants';
 import TextViewer from './components/TextViewer';
-import MorseKey from './components/MorseKey';
 import { getMorseCodeFromTime } from '../../utils/app.utils';
 import MorseDisplay from './components/MorseDisplay';
 import { IMorseState } from './Racer.interfaces';
@@ -114,6 +113,7 @@ const Racer: React.FC<{}> = () => {
         
         document.body.addEventListener('keyup', onMorseKeyUp as unknown as EventListener);
         document.body.addEventListener('keydown', onMorseKeyDown as unknown as EventListener);
+
         setupAudio();
     }, [onMorseKeyDown, onMorseKeyUp, setupAudio]);
 
@@ -134,10 +134,6 @@ const Racer: React.FC<{}> = () => {
             />
             <MorseDisplay
                 morseBuffer={morseBuffer}
-            />
-            <MorseKey
-                onMorseKeyDown={onMorseKeyDown}
-                onMorseKeyUp={onMorseKeyUp}
             />
             {isModalOpen && (
                 <ConfigModal

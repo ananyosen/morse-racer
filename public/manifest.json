@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Morse Racer",
+  "name": "Practice typing morse on a stright key",
   "icons": [
     {
       "src": "favicon.ico",

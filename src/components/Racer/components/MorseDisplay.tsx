@@ -9,24 +9,37 @@ const MorseDisplay: React.FC<IMorseDisplay> = (props) => {
     return (
         <div
             style={{
-                // border: '2px solid black',
-                borderRadius: '4px',
-                padding: '16px',
-                width: '300px',
-                marginTop: '16px',
-                height: '42px',
-                background: '#B3E5FC'
+                marginTop: '32px',
+                userSelect: 'none',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                fontSize: '32px',
+                fontWeight: 'bold',
+                fontFamily: '"Courier Prime", monospace',
+                color: 'white',
+                gap: '8px',
             }}
         >
-            <span
+            <span>
+                ⏷ Current Sequence
+            </span>
+            <div
                 style={{
-                    letterSpacing: '8px',
-                    fontSize: '32px',
-                    fontWeight: 'bold',
+                    height: '48px',
+                    minWidth: '160px',
+                    borderBottom: '3px solid white',
+                    textAlign: 'center'
                 }}
             >
-                {morseBuffer?.replaceAll('.', '·').replaceAll('-', '–')}
-            </span>
+                <span
+                    style={{
+                        letterSpacing: '8px',
+                    }}
+                >
+                    {morseBuffer?.replaceAll('.', '·').replaceAll('-', '–')}
+                </span>
+            </div>
         </div>
     );
 };
