@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, EventHandler } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { baseTime, keyboardBinding, MORSE_TO_CHAR_MAP, slopPercentage, text } from '../app.constants';
 import TextViewer from './components/TextViewer';
 import MorseKey from './components/MorseKey';
@@ -37,9 +37,7 @@ const Racer: React.FC<{}> = () => {
         oscillator.connect(audioGain.current);
         audioGain.current?.connect(audioContext.current?.destination);
 
-        audioGain.current?.gain?.exponentialRampToValueAtTime(
-            0.000001, audioContext.current?.currentTime + 0.05
-        );
+        audioGain.current.gain.value = 0.000001;
 
         oscillator.start(0);
     }, []);
@@ -73,7 +71,7 @@ const Racer: React.FC<{}> = () => {
         }
         timestamp.current = new Date().getTime();
         startAudio();
-    }, []);
+    }, [startAudio]);
 
     const charCompleteCallback = () => {
         setMorseState(({currentIndex, morseBuffer, validations}) => {
@@ -99,7 +97,7 @@ const Racer: React.FC<{}> = () => {
         setMorseState((state) => ({...state, morseBuffer: state.morseBuffer + morseCode}));
         charCompleteTimeoutRef.current = setTimeout(charCompleteCallback, baseTime * 4);
         stopAudio();
-    }, []);
+    }, [stopAudio]);
 
     const openConfigModal = () => {
         document.body.removeEventListener('keyup', onMorseKeyUp as unknown as EventListener);
@@ -108,13 +106,13 @@ const Racer: React.FC<{}> = () => {
         setModalOpen(true);
     };
 
-    const closeConfigModal = () => {
+    const closeConfigModal = useCallback(() => {
         setModalOpen(false);
         
         document.body.addEventListener('keyup', onMorseKeyUp as unknown as EventListener);
         document.body.addEventListener('keydown', onMorseKeyDown as unknown as EventListener);
         setupAudio();
-    };
+    }, [onMorseKeyDown, onMorseKeyUp, setupAudio]);
 
     return (
         <div

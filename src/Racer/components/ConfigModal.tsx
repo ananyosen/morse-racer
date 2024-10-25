@@ -21,7 +21,7 @@ const ConfigModal: React.FC<IConfigModalProps> = (props) => {
         return () => {
             document.body.removeEventListener('keyup', keypressHandler);
         }
-    }, []);
+    }, [closeModal]);
 
     return (
         <Modal
