@@ -22,6 +22,47 @@ const Racer: React.FC<{}> = () => {
 
     const timestamp = useRef<number>(0);
     const charCompleteTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+    const audioContext = useRef<AudioContext | null>(null);
+    const audioGain = useRef<GainNode | null>(null);
+
+    const setupAudio = useCallback(() => {
+        if (audioContext.current) {
+            return;
+        }
+
+        audioContext.current = new AudioContext();
+        const oscillator = audioContext.current?.createOscillator();
+        oscillator.type = 'sine';
+        audioGain.current = audioContext.current?.createGain();
+        oscillator.connect(audioGain.current);
+        audioGain.current?.connect(audioContext.current?.destination);
+
+        audioGain.current?.gain?.exponentialRampToValueAtTime(
+            0.000001, audioContext.current?.currentTime + 0.05
+        );
+
+        oscillator.start(0);
+    }, []);
+
+    const startAudio = useCallback(() => {
+        if (!audioContext.current) {
+            return;
+        }
+
+        audioGain.current?.gain?.exponentialRampToValueAtTime(
+            0.95, audioContext.current?.currentTime + 0.05
+        );
+    }, []);
+
+    const stopAudio = useCallback(() => {
+        if (!audioContext.current) {
+            return;
+        }
+
+        audioGain.current?.gain?.exponentialRampToValueAtTime(
+            0.000001, audioContext.current?.currentTime + 0.05
+        );
+    }, []);
 
     const onMorseKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
         if (e.code !== keyboardBinding) {
@@ -31,6 +72,7 @@ const Racer: React.FC<{}> = () => {
             clearTimeout(charCompleteTimeoutRef.current);
         }
         timestamp.current = new Date().getTime();
+        startAudio();
     }, []);
 
     const charCompleteCallback = () => {
@@ -56,6 +98,7 @@ const Racer: React.FC<{}> = () => {
         const morseCode = getMorseCodeFromTime(diffTime, baseTime, slopPercentage);
         setMorseState((state) => ({...state, morseBuffer: state.morseBuffer + morseCode}));
         charCompleteTimeoutRef.current = setTimeout(charCompleteCallback, baseTime * 4);
+        stopAudio();
     }, []);
 
     const openConfigModal = () => {
@@ -66,10 +109,11 @@ const Racer: React.FC<{}> = () => {
     };
 
     const closeConfigModal = () => {
+        setModalOpen(false);
+        
         document.body.addEventListener('keyup', onMorseKeyUp as unknown as EventListener);
         document.body.addEventListener('keydown', onMorseKeyDown as unknown as EventListener);
-
-        setModalOpen(false);
+        setupAudio();
     };
 
     return (
