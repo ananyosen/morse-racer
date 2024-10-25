@@ -1,5 +1,5 @@
 import React from 'react';
-import { REPO_LINK } from '../../app.constants';
+import { REPO_LINK } from '../../constants/app.constants';
 import GithubLogo from '../../assets/github.svg';
 
 const Nav: React.FC = () => {

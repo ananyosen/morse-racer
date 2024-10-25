@@ -1,11 +1,12 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { baseTime, keyboardBinding, MORSE_TO_CHAR_MAP, slopPercentage, text } from '../../app.constants';
+import { baseTime, keyboardBinding, slopPercentage, text } from '../../constants/app.constants';
 import TextViewer from './components/TextViewer';
 import MorseKey from './components/MorseKey';
-import { getMorseCodeFromTime } from '../../app.utils';
+import { getMorseCodeFromTime } from '../../utils/app.utils';
 import MorseDisplay from './components/MorseDisplay';
 import { IMorseState } from './Racer.interfaces';
 import ConfigModal from './components/ConfigModal';
+import { MORSE_TO_CHAR_MAP } from '../../constants/ morse.constants';
 
 const Racer: React.FC<{}> = () => {
     const [{

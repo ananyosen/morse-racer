@@ -1,3 +1,5 @@
+import { LOCALSTORAGE_KEY } from "../constants/app.constants";
+
 export const getMorseCodeFromTime = (diffTime: number, baseTime: number, slopPercentage: number) => {
     if (
         diffTime >= baseTime * (100 - slopPercentage)/100
@@ -14,4 +16,16 @@ export const getMorseCodeFromTime = (diffTime: number, baseTime: number, slopPer
     }
 
     return 'N';
+};
+
+export const getContextDataFromLocalstorage = () => {
+    try {
+        return JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY) ?? '') ?? {};
+    } catch {
+        return {};
+    }
+};
+
+export const storeContextDataToLocalstorage = (data: unknown) => {
+    localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(data));
 };

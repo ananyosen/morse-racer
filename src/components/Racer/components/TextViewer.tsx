@@ -12,7 +12,6 @@ const TextViewer: React.FC<ITextViewerProps> = (props) => {
         <div
             style={{
                 padding: '16px',
-                // border: '3px solid #00796B',
                 width: '100%',
                 boxSizing: 'border-box',
                 textTransform: 'capitalize',

@@ -9,12 +9,13 @@ const MorseDisplay: React.FC<IMorseDisplay> = (props) => {
     return (
         <div
             style={{
-                border: '2px solid black',
+                // border: '2px solid black',
                 borderRadius: '4px',
                 padding: '16px',
                 width: '300px',
                 marginTop: '16px',
                 height: '42px',
+                background: '#B3E5FC'
             }}
         >
             <span
@@ -24,7 +25,7 @@ const MorseDisplay: React.FC<IMorseDisplay> = (props) => {
                     fontWeight: 'bold',
                 }}
             >
-                {morseBuffer}
+                {morseBuffer?.replaceAll('.', '·').replaceAll('-', '–')}
             </span>
         </div>
     );
