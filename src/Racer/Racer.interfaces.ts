@@ -14,3 +14,14 @@ export interface IMorseKeyProps {
 export interface IMorseDisplay {
     morseBuffer: string;
 };
+
+export interface IMorseState {
+    validations: ValidationResponse[];
+    currentIndex: number;
+    morseBuffer: string;
+};
+
+export interface IConfigModalProps {
+    open: boolean;
+    closeModal: VoidFunction;
+};

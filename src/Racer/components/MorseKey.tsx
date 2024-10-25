@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { IMorseKeyProps } from '../Racer.interfaces';
 
 const MorseKey: React.FC<IMorseKeyProps> = (props) => {
