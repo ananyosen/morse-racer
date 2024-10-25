@@ -1,8 +1,8 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { baseTime, keyboardBinding, MORSE_TO_CHAR_MAP, slopPercentage, text } from '../app.constants';
+import { baseTime, keyboardBinding, MORSE_TO_CHAR_MAP, slopPercentage, text } from '../../app.constants';
 import TextViewer from './components/TextViewer';
 import MorseKey from './components/MorseKey';
-import { getMorseCodeFromTime } from '../app.utils';
+import { getMorseCodeFromTime } from '../../app.utils';
 import MorseDisplay from './components/MorseDisplay';
 import { IMorseState } from './Racer.interfaces';
 import ConfigModal from './components/ConfigModal';
@@ -66,6 +66,7 @@ const Racer: React.FC<{}> = () => {
         if (e.code !== keyboardBinding) {
             return;
         }
+        e.preventDefault();
         if(charCompleteTimeoutRef.current) {
             clearTimeout(charCompleteTimeoutRef.current);
         }
@@ -91,6 +92,7 @@ const Racer: React.FC<{}> = () => {
         if (e.code !== keyboardBinding) {
             return;
         }
+        e.preventDefault();
         const diffTime = new Date().getTime() - timestamp.current;
         console.log('diff: ', diffTime);
         const morseCode = getMorseCodeFromTime(diffTime, baseTime, slopPercentage);
@@ -120,6 +122,8 @@ const Racer: React.FC<{}> = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
+                padding: '0 16px',
+                marginTop: '32px',
             }}
         >
             <TextViewer

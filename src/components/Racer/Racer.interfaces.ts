@@ -1,4 +1,4 @@
-import { ValidationResponse } from "../app";
+import { ValidationResponse } from "../../app";
 
 export interface ITextViewerProps {
     characters: string[];

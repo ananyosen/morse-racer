@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Modal from '@mui/material/Modal';
 import { IConfigModalProps } from '../Racer.interfaces';
-import { keyboardBinding } from '../../app.constants';
+import { keyboardBinding } from '../../../app.constants';
 
 const ConfigModal: React.FC<IConfigModalProps> = (props) => {
     const {
