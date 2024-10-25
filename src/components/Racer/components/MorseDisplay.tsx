@@ -21,8 +21,12 @@ const MorseDisplay: React.FC<IMorseDisplay> = (props) => {
                 gap: '8px',
             }}
         >
-            <span>
-                ⏷ Current Sequence
+            <span
+                style={{
+                    textAlign: 'center',
+                }}
+            >
+                Current Sequence ⏷
             </span>
             <div
                 style={{
