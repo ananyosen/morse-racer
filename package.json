@@ -5,7 +5,8 @@
   "scripts": {
     "build": "rm -rf build && webpack --mode production --config ./config/webpack/webpack.config.js",
     "start": "webpack-dev-server --mode development --config ./config/webpack/webpack.config.js",
-    "publish": "wrangler pages deploy build/"
+    "publish": "wrangler pages deploy build/",
+    "publish-prod": "wrangler pages deploy build/ --branch production"
   },
   "dependencies": {
     "@svgr/webpack": "^5.5.0",
