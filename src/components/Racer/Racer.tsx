@@ -123,8 +123,8 @@ const Racer: React.FC<{}> = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                padding: '0 16px',
-                marginTop: '32px',
+                padding: '0 1rem',
+                marginTop: '2rem',
             }}
         >
             <TextViewer

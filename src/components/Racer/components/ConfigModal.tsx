@@ -25,8 +25,8 @@ const ConfigModal: React.FC<IConfigModalProps> = (props) => {
     return (
         <div
             style={{
-                marginTop: '32px',
-                fontSize: '24px',
+                marginTop: '2rem',
+                fontSize: '1.5rem',
                 fontFamily: '"Courier Prime", monospace',
                 color: 'white',
                 textAlign: 'center',

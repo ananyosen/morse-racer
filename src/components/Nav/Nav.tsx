@@ -7,10 +7,10 @@ const Nav: React.FC = () => {
         <nav
             style={{
                 width: '100%',
-                height: '64px',
+                height: '4rem',
                 display: 'flex',
                 alignItems: 'center',
-                padding: '0 32px',
+                padding: '0 2rem',
                 boxSizing: 'border-box',
             }}
         >
@@ -18,7 +18,7 @@ const Nav: React.FC = () => {
                 style={{
                     textDecoration: 'none',
                     fontFamily: '"Courier Prime", monospace',
-                    fontSize: '32px',
+                    fontSize: '2rem',
                     fontWeight: 'bold',
                     color: 'white',
                 }}
@@ -28,7 +28,7 @@ const Nav: React.FC = () => {
                     style={{
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '8px',
+                        gap: '0.5rem',
                     }}
                 >
                     <img
@@ -39,7 +39,7 @@ const Nav: React.FC = () => {
                     />
                     <div
                         style={{
-                            marginTop: '4px',
+                            marginTop: '0.25rem',
                         }}
                     >
                         Morse Racer

@@ -9,16 +9,16 @@ const MorseDisplay: React.FC<IMorseDisplay> = (props) => {
     return (
         <div
             style={{
-                marginTop: '32px',
+                marginTop: '2rem',
                 userSelect: 'none',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                fontSize: '32px',
+                fontSize: '2rem',
                 fontWeight: 'bold',
                 fontFamily: '"Courier Prime", monospace',
                 color: 'white',
-                gap: '8px',
+                gap: '0.5rem',
             }}
         >
             <span
@@ -30,15 +30,15 @@ const MorseDisplay: React.FC<IMorseDisplay> = (props) => {
             </span>
             <div
                 style={{
-                    height: '48px',
-                    minWidth: '160px',
-                    borderBottom: '3px solid white',
+                    height: '3rem',
+                    minWidth: '10rem',
+                    borderBottom: '0.2rem solid white',
                     textAlign: 'center'
                 }}
             >
                 <span
                     style={{
-                        letterSpacing: '8px',
+                        letterSpacing: '0.5rem',
                     }}
                 >
                     {morseBuffer?.replaceAll('.', '·').replaceAll('-', '–')}

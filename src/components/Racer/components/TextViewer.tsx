@@ -3,16 +3,16 @@ import { ITextViewerProps } from '../Racer.interfaces';
 import styled from 'styled-components';
 
 const TextViewerContainer = styled.div`
-    padding: 16px;
+    padding: 1rem;
     width: 100%;
     box-sizing: border-box;
     text-transform: capitalize;
     font-family: "Courier Prime", monospace;
-    font-size: 32px;
+    font-size: 2rem;
     background: #C5CAE9;
 
-    @media (max-width: 480px) {
-        font-size: 16px;
+    @media (max-width: 768px) {
+        font-size: 1.5rem;
     }
 `;
 

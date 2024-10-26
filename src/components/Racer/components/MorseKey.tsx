@@ -10,10 +10,10 @@ const MorseKey: React.FC<IMorseKeyProps> = (props) => {
     return (
         <div
             style={{
-                padding: '16px',
-                marginTop: '32px',
+                padding: '1rem',
+                marginTop: '2rem',
                 border: '1px solid black',
-                borderRadius: '4px',
+                borderRadius: '0.25rem',
                 cursor: 'pointer'
             }}
             autoFocus
