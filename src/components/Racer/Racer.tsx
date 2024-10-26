@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useMemo } from 'react';
 import { baseTime, keyboardBinding, slopPercentage, text } from '../../constants/app.constants';
 import TextViewer from './components/TextViewer';
 import { getMorseCodeFromTime } from '../../utils/app.utils';
@@ -62,11 +62,24 @@ const Racer: React.FC<{}> = () => {
         );
     }, []);
 
-    const onMorseKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
-        if (e.code !== keyboardBinding) {
-            return;
+    const keyboardEventWrapper = useCallback((callback: VoidFunction) => {
+        return (e: KeyboardEvent) => {
+            if (e.code !== keyboardBinding) {
+                return;
+            }
+            e.preventDefault();
+            callback();
         }
-        e.preventDefault();
+    }, [keyboardBinding]);
+
+    const pointerEventWrapper = useCallback((callback: VoidFunction) => {
+        return (e: PointerEvent) => {
+            e.preventDefault();
+            callback();
+        }
+    }, [keyboardBinding]);
+
+    const onMorseKeyDown = useCallback(() => {
         if(charCompleteTimeoutRef.current) {
             clearTimeout(charCompleteTimeoutRef.current);
         }
@@ -88,11 +101,7 @@ const Racer: React.FC<{}> = () => {
         })
     }
 
-    const onMorseKeyUp = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
-        if (e.code !== keyboardBinding) {
-            return;
-        }
-        e.preventDefault();
+    const onMorseKeyUp = useCallback(() => {
         const diffTime = new Date().getTime() - timestamp.current;
         console.log('diff: ', diffTime);
         const morseCode = getMorseCodeFromTime(diffTime, baseTime, slopPercentage);
@@ -101,9 +110,16 @@ const Racer: React.FC<{}> = () => {
         stopAudio();
     }, [stopAudio]);
 
+    const keyUpHandler = useMemo(() => keyboardEventWrapper(onMorseKeyUp), [onMorseKeyUp, keyboardEventWrapper]);
+    const keyDownHandler = useMemo(() => keyboardEventWrapper(onMorseKeyDown), [onMorseKeyDown, keyboardEventWrapper]);
+    const pointerUpHandler = useMemo(() => pointerEventWrapper(onMorseKeyUp), [onMorseKeyUp, pointerEventWrapper]);
+    const pointerDownHandler = useMemo(() => pointerEventWrapper(onMorseKeyDown), [onMorseKeyDown, pointerEventWrapper]);
+
     const openConfigModal = () => {
-        document.body.removeEventListener('keyup', onMorseKeyUp as unknown as EventListener);
-        document.body.removeEventListener('keydown', onMorseKeyDown as unknown as EventListener);
+        document.body.removeEventListener('keyup', keyUpHandler);
+        document.body.removeEventListener('keydown', keyDownHandler);
+        document.body.removeEventListener('pointerup', pointerUpHandler);
+        document.body.removeEventListener('pointerdown', pointerDownHandler);
 
         setModalOpen(true);
     };
@@ -111,8 +127,10 @@ const Racer: React.FC<{}> = () => {
     const closeConfigModal = useCallback(() => {
         setModalOpen(false);
         
-        document.body.addEventListener('keyup', onMorseKeyUp as unknown as EventListener);
-        document.body.addEventListener('keydown', onMorseKeyDown as unknown as EventListener);
+        document.body.addEventListener('keyup', keyUpHandler);
+        document.body.addEventListener('keydown', keyDownHandler);
+        document.body.addEventListener('pointerup', pointerUpHandler);
+        document.body.addEventListener('pointerdown', pointerDownHandler);
 
         setupAudio();
     }, [onMorseKeyDown, onMorseKeyUp, setupAudio]);
@@ -135,11 +153,24 @@ const Racer: React.FC<{}> = () => {
             <MorseDisplay
                 morseBuffer={morseBuffer}
             />
-            {isModalOpen && (
+            {isModalOpen ? (
                 <ConfigModal
                     open={isModalOpen}
                     closeModal={closeConfigModal}
                 />
+            ) : (
+                <div
+                    style={{
+                        marginTop: '2rem',
+                        fontSize: '1.5rem',
+                        color: 'white',
+                        textAlign: 'center',
+                    }}
+                >
+                    <span>
+                        "[{keyboardBinding}]" or click/tap anywhere
+                    </span>
+                </div>
             )}
         </div>
     )

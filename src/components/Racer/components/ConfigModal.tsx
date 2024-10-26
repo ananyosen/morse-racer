@@ -16,9 +16,11 @@ const ConfigModal: React.FC<IConfigModalProps> = (props) => {
         };
 
         document.body.addEventListener('keyup', keypressHandler);
+        document.body.addEventListener('pointerup', closeModal);
 
         return () => {
             document.body.removeEventListener('keyup', keypressHandler);
+            document.body.removeEventListener('pointerup', closeModal);
         }
     }, [closeModal]);
 
@@ -33,7 +35,7 @@ const ConfigModal: React.FC<IConfigModalProps> = (props) => {
             }}
         >
             <span>
-                Press key "[{keyboardBinding}]" to start
+                Press key "[{keyboardBinding}]" or click/tap anywhere to start
             </span>
         </div>
     )
