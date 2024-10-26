@@ -29,6 +29,7 @@ const ConfigModal: React.FC<IConfigModalProps> = (props) => {
                 fontSize: '24px',
                 fontFamily: '"Courier Prime", monospace',
                 color: 'white',
+                textAlign: 'center',
             }}
         >
             <span>
