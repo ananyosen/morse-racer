@@ -24,7 +24,27 @@ const Nav: React.FC = () => {
                 }}
                 href="/"
             >
-                Morse Racer
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                    }}
+                >
+                    <img
+                        src="/logo192.png"
+                        width={24}
+                        height={24}
+                        alt="morse-racer"
+                    />
+                    <div
+                        style={{
+                            marginTop: '4px',
+                        }}
+                    >
+                        Morse Racer
+                    </div>
+                </div>
             </a>
             <div style={{flexGrow: 1}} />
             <a

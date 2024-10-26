@@ -50,7 +50,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
-    plugins: [new TsconfigPathsPlugin({/* options: see below */})],
+    plugins: [new TsconfigPathsPlugin({})],
     alias: {
       'react': "preact/compat",
       'react-dom/test-utils': "preact/test-utils",

@@ -23,7 +23,18 @@ const ConfigModal: React.FC<IConfigModalProps> = (props) => {
     }, [closeModal]);
 
     return (
-        <h1>test</h1>
+        <div
+            style={{
+                marginTop: '32px',
+                fontSize: '24px',
+                fontFamily: '"Courier Prime", monospace',
+                color: 'white',
+            }}
+        >
+            <span>
+                Press key "[{keyboardBinding}]" to start
+            </span>
+        </div>
     )
 };
 
