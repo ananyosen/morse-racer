@@ -113,6 +113,10 @@ const Racer: React.FC<{}> = () => {
         stopAudio();
     }, [stopAudio]);
 
+    const cancelSymbol = useCallback(() => {
+        stopAudio();
+    }, [stopAudio]);
+
     const keyUpHandler = useMemo(() => keyboardEventWrapper(onMorseKeyUp), [onMorseKeyUp, keyboardEventWrapper]);
     const keyDownHandler = useMemo(() => keyboardEventWrapper(onMorseKeyDown), [onMorseKeyDown, keyboardEventWrapper]);
     const pointerUpHandler = useMemo(() => pointerEventWrapper(onMorseKeyUp), [onMorseKeyUp, pointerEventWrapper]);
@@ -123,6 +127,7 @@ const Racer: React.FC<{}> = () => {
         document.body.removeEventListener('keydown', keyDownHandler);
         document.body.removeEventListener('pointerup', pointerUpHandler);
         document.body.removeEventListener('pointerdown', pointerDownHandler);
+        document.body.removeEventListener('touchmove', cancelSymbol);
 
         setModalOpen(true);
     };
@@ -134,6 +139,7 @@ const Racer: React.FC<{}> = () => {
         document.body.addEventListener('keydown', keyDownHandler);
         document.body.addEventListener('pointerup', pointerUpHandler);
         document.body.addEventListener('pointerdown', pointerDownHandler);
+        document.body.addEventListener('touchmove', cancelSymbol);
         
         // firefox android does not detect user gesture unless
         // this is called "after" the gesture handling is complete
