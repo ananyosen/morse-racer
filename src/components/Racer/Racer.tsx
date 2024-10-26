@@ -51,8 +51,8 @@ const Racer: React.FC<{}> = () => {
             return;
         }
 
-        audioGain.current?.gain?.exponentialRampToValueAtTime(
-            0.8, audioContext.current?.currentTime + 0.05
+        audioGain.current?.gain?.linearRampToValueAtTime(
+            0.8, audioContext.current?.currentTime + 0.07
         );
     }, []);
 
@@ -61,8 +61,8 @@ const Racer: React.FC<{}> = () => {
             return;
         }
 
-        audioGain.current?.gain?.exponentialRampToValueAtTime(
-            0.000001, audioContext.current?.currentTime + 0.05
+        audioGain.current?.gain?.linearRampToValueAtTime(
+            0.000001, audioContext.current?.currentTime + 0.07
         );
     }, []);
 
