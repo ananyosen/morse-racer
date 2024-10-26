@@ -25,14 +25,14 @@ const Racer: React.FC<{}> = () => {
     const audioContext = useRef<AudioContext | null>(null);
     const audioGain = useRef<GainNode | null>(null);
 
-    const setupAudio = useCallback(() => {
+    const setupAudio = useCallback(async () => {
         if (audioContext.current) {
             return;
         }
 
         audioContext.current = new AudioContext();
         if (audioContext.current?.state === 'suspended') {
-            audioContext.current?.resume();
+            await audioContext.current?.resume();
         }
         const oscillator = audioContext.current?.createOscillator();
         oscillator.type = 'sine';
