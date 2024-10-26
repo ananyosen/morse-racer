@@ -50,13 +50,13 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
-    plugins: [new TsconfigPathsPlugin({/* options: see below */})]
+    plugins: [new TsconfigPathsPlugin({})]
   },
   plugins: [
     new HTMLWebpackPlugin({
       inject: 'body',
       template: path.resolve(PUBLIC_PATH, 'index.html'),
     }),
-    new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin({ analyzerMode: 'disabled' })
   ]
 };
