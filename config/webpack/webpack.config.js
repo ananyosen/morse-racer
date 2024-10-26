@@ -50,13 +50,19 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
-    plugins: [new TsconfigPathsPlugin({/* options: see below */})]
+    plugins: [new TsconfigPathsPlugin({/* options: see below */})],
+    alias: {
+      'react': "preact/compat",
+      'react-dom/test-utils': "preact/test-utils",
+      'react-dom': "preact/compat",     // Must be below test-utils
+      'react/jsx-runtime': "preact/jsx-runtime"
+    },
   },
   plugins: [
     new HTMLWebpackPlugin({
       inject: 'body',
       template: path.resolve(PUBLIC_PATH, 'index.html'),
     }),
-    new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin({ analyzerMode: 'disabled' }),
   ]
 };

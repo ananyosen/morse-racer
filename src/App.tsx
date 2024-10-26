@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -34,7 +34,6 @@ function App() {
       <div
         style={{
           minHeight: '100vh',
-          width: '100vw',
           // backgroundImage: 'linear-gradient(to top, #09203f 0%, #537895 100%)',
           // backgroundImage: 'linear-gradient(15deg, #13547a 0%, #80d0c7 100%)',
           // backgroundImage: 'linear-gradient(-60deg, #16a085 0%, #f4d03f 100%)',
@@ -43,7 +42,9 @@ function App() {
         }}
       >
         <Nav />
-        <RouterProvider router={router} />
+        <React.Suspense fallback={null}>
+          <RouterProvider router={router} />
+        </React.Suspense>
       </div>
     </AppContext.Provider>
   );
