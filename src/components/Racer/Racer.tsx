@@ -36,6 +36,7 @@ const Racer: React.FC<{}> = () => {
         }
         const oscillator = audioContext.current?.createOscillator();
         oscillator.type = 'sine';
+        oscillator.frequency.value = 550;
         audioGain.current = audioContext.current?.createGain();
         oscillator.connect(audioGain.current);
         audioGain.current?.connect(audioContext.current?.destination);
@@ -51,7 +52,7 @@ const Racer: React.FC<{}> = () => {
         }
 
         audioGain.current?.gain?.exponentialRampToValueAtTime(
-            0.95, audioContext.current?.currentTime + 0.05
+            0.8, audioContext.current?.currentTime + 0.05
         );
     }, []);
 
@@ -133,8 +134,10 @@ const Racer: React.FC<{}> = () => {
         document.body.addEventListener('keydown', keyDownHandler);
         document.body.addEventListener('pointerup', pointerUpHandler);
         document.body.addEventListener('pointerdown', pointerDownHandler);
-
-        setupAudio();
+        
+        // firefox android does not detect user gesture unless
+        // this is called "after" the gesture handling is complete
+        setTimeout(setupAudio, 0); 
     }, [onMorseKeyDown, onMorseKeyUp, setupAudio]);
 
     return (
