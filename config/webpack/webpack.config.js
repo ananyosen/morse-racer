@@ -2,6 +2,7 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const SRC_PATH = path.resolve(__dirname, '../../src');
@@ -59,6 +60,19 @@ module.exports = {
     },
   },
   plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: PUBLIC_PATH,
+          to: DIST_PATH,
+          globOptions: {
+            // dot: true,
+            // gitignore: true,
+            ignore: ["**/*.html"],
+          },
+        },
+      ],
+    }),
     new HTMLWebpackPlugin({
       inject: 'body',
       template: path.resolve(PUBLIC_PATH, 'index.html'),
