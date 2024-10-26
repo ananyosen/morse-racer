@@ -2,6 +2,7 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const SRC_PATH = path.resolve(__dirname, '../../src');
@@ -50,13 +51,32 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
-    plugins: [new TsconfigPathsPlugin({})]
+    plugins: [new TsconfigPathsPlugin({})],
+    alias: {
+      'react': "preact/compat",
+      'react-dom/test-utils': "preact/test-utils",
+      'react-dom': "preact/compat",     // Must be below test-utils
+      'react/jsx-runtime': "preact/jsx-runtime"
+    },
   },
   plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: PUBLIC_PATH,
+          to: DIST_PATH,
+          globOptions: {
+            // dot: true,
+            // gitignore: true,
+            ignore: ["**/*.html"],
+          },
+        },
+      ],
+    }),
     new HTMLWebpackPlugin({
       inject: 'body',
       template: path.resolve(PUBLIC_PATH, 'index.html'),
     }),
-    new BundleAnalyzerPlugin({ analyzerMode: 'disabled' })
+    new BundleAnalyzerPlugin({ analyzerMode: 'disabled' }),
   ]
 };
