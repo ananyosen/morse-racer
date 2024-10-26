@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback, useMemo } from 'react';
-import { baseTime, keyboardBinding, slopPercentage, text } from '../../constants/app.constants';
+import { baseTime, keyboardBinding, LOW_GAIN, slopPercentage, text } from '../../constants/app.constants';
 import TextViewer from './components/TextViewer';
 import { getMorseCodeFromTime } from '../../utils/app.utils';
 import MorseDisplay from './components/MorseDisplay';
@@ -41,7 +41,7 @@ const Racer: React.FC<{}> = () => {
         oscillator.connect(audioGain.current);
         audioGain.current?.connect(audioContext.current?.destination);
 
-        audioGain.current.gain.value = 0.000001;
+        audioGain.current.gain.value = LOW_GAIN;
 
         oscillator.start(0);
     }, []);
@@ -62,7 +62,7 @@ const Racer: React.FC<{}> = () => {
         }
 
         audioGain.current?.gain?.linearRampToValueAtTime(
-            0.000001, audioContext.current?.currentTime + 0.07
+            LOW_GAIN, audioContext.current?.currentTime + 0.07
         );
     }, []);
 
