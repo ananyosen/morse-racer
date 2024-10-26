@@ -16,6 +16,7 @@ const router = createBrowserRouter(routes);
 const AppContainer = styled.div`
   min-height: 100vh;
   background-image: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%);
+  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
   font-family: "Courier Prime", monospace;
 `;
 
