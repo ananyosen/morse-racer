@@ -31,6 +31,9 @@ const Racer: React.FC<{}> = () => {
         }
 
         audioContext.current = new AudioContext();
+        if (audioContext.current?.state === 'suspended') {
+            audioContext.current?.resume();
+        }
         const oscillator = audioContext.current?.createOscillator();
         oscillator.type = 'sine';
         audioGain.current = audioContext.current?.createGain();
@@ -103,7 +106,6 @@ const Racer: React.FC<{}> = () => {
 
     const onMorseKeyUp = useCallback(() => {
         const diffTime = new Date().getTime() - timestamp.current;
-        console.log('diff: ', diffTime);
         const morseCode = getMorseCodeFromTime(diffTime, baseTime, slopPercentage);
         setMorseState((state) => ({...state, morseBuffer: state.morseBuffer + morseCode}));
         charCompleteTimeoutRef.current = setTimeout(charCompleteCallback, baseTime * 4);
