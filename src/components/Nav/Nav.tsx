@@ -32,9 +32,7 @@ const Nav: React.FC = () => {
                 target='_blank'
                 href={REPO_LINK}
             >
-                <img
-                    src={GithubLogo}
-                    alt="repo-link"
+                <GithubLogo
                     width={32}
                     height={32}
                 />
