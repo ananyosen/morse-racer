@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback, useMemo } from 'react';
-import { baseTime, keyboardBinding, LOW_GAIN, slopPercentage, text } from '../../constants/app.constants';
+import { baseTime, keyboardBinding, LOW_GAIN, slopPercentage } from '../../constants/app.constants';
 import TextViewer from './components/TextViewer';
 import { getMorseCodeFromTime } from '../../utils/app.utils';
 import MorseDisplay from './components/MorseDisplay';
@@ -11,11 +11,13 @@ const Racer: React.FC<{}> = () => {
     const [{
         validations,
         currentIndex,
-        morseBuffer
+        morseBuffer,
+        currentParagraph,
     }, setMorseState] = useState<IMorseState>({
-        validations: Array(text.length).fill('pending'),
+        validations: Array(window.initial_paragraph.length).fill('pending'),
         currentIndex: 0,
         morseBuffer: '',
+        currentParagraph: window.initial_paragraph,
     });
 
     const [isModalOpen, setModalOpen] = useState(true);
@@ -92,15 +94,16 @@ const Racer: React.FC<{}> = () => {
     }, [startAudio]);
 
     const charCompleteCallback = () => {
-        setMorseState(({currentIndex, morseBuffer, validations}) => {
+        setMorseState(({currentIndex, morseBuffer, validations, ...rest}) => {
             const parsedChar = MORSE_TO_CHAR_MAP[morseBuffer];
-            const isValidInput = text.charAt(currentIndex).toUpperCase() === parsedChar;
+            const isValidInput = currentParagraph?.charAt(currentIndex).toUpperCase() === parsedChar;
             validations[currentIndex] = isValidInput ? 'valid' : 'invalid';
 
             return ({
                 validations: [...validations],
                 currentIndex: currentIndex + 1,
                 morseBuffer: '',
+                ...rest,
             });
         })
     }
@@ -157,7 +160,7 @@ const Racer: React.FC<{}> = () => {
             }}
         >
             <TextViewer
-                characters={text.split('')}
+                characters={currentParagraph?.split('')}
                 validations={validations}
                 currentIndex={currentIndex}
             />

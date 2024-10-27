@@ -43,6 +43,33 @@
         }
       }
     </style>
+    <script>
+      var initialOptions = [
+        "Our chairs, being his patents, embraced and caressed us rather than submitted to be sat upon, and there was that luxurious after-dinner atmosphere when thought roams gracefully free of the trammels of precision.",
+        "And he put it to us in this way--marking the points with a lean forefinger--as we sat and lazily admired his earnestness over this new paradox (as we thought it) and his fecundity.",
+        "'I do not mean to ask you to accept anything without reasonable ground for it. You will soon admit as much as I need from you. You know of course that a mathematical line, a line of thickness _nil_, has no real existence.",
+        "They taught you that? Neither has a mathematical plane. These things are mere abstractions.' 'That is all right,' said the Psychologist. 'Nor, having only length, breadth, and thickness, can a cube have a real existence.'",
+        "'There I object,' said Filby. 'Of course a solid body may exist. All real things--' 'So most people think. But wait a moment. Can an _instantaneous_ cube exist?' 'Don't follow you,' said Filby.",
+        "But through a natural infirmity of the flesh, which I will explain to you in a moment, we incline to overlook this fact. There are really four dimensions, three which we call the three planes of Space, and a fourth, Time.",
+        "But some foolish people have got hold of the wrong side of that idea. You have all heard what they have to say about this Fourth Dimension?' '_I_ have not,' said the Provincial Mayor. 'It is simply this.",
+        "That Space, as our mathematicians have it, is spoken of as having three dimensions, which one may call Length, Breadth, and Thickness, and is always definable by reference to three planes, each at right angles to the others.",
+        "Here is a popular scientific diagram, a weather record. This line I trace with my finger shows the movement of the barometer. Yesterday it was so high, yesterday night it fell, then this morning it rose again, and so gently upward to here.",
+        "Surely the mercury did not trace this line in any of the dimensions of Space generally recognized? But certainly it traced such a line, and that line, therefore, we must conclude was along the Time-Dimension.'"
+      ];
+      window.initial_paragraph = initialOptions[Math.floor(Math.random() * initialOptions.length) % initialOptions.length];
+      var fileCounts = 4;
+      fetch('/' + (Math.floor(Math.random() * fileCounts) % fileCounts).toString().padStart(5, '0') + '.txt').then(function(r) {
+        return r.text();
+      }).then(function(file) {
+        if (typeof file !== 'string') {
+          return;
+        }
+        var parts = file.split('\n');
+        window.initial_paragraph = parts[Math.floor(Math.random() * parts.length) % parts.length];
+      }).catch(function() {
+        console.error('Unable to fetch full paragraph data');
+      })
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

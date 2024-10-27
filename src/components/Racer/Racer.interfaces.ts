@@ -19,6 +19,7 @@ export interface IMorseState {
     validations: ValidationResponse[];
     currentIndex: number;
     morseBuffer: string;
+    currentParagraph: string;
 };
 
 export interface IConfigModalProps {
