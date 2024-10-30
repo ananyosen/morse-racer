@@ -1,12 +1,13 @@
 import React from 'react';
-import { RouteObject } from 'react-router-dom';
+import { lazy } from 'preact-iso';
+import { IRouteObject } from './app';
 
-const Racer = React.lazy(() => import('./components/Racer'));
+const Racer = lazy(() => import('./components/Racer'));
 
-const routes: RouteObject[] = [
+const routes: IRouteObject[] = [
     {
         path: '/',
-        element: <Racer />,
+        Component: Racer,
     }
 ];
 
