@@ -9,7 +9,7 @@ const SRC_PATH = path.resolve(__dirname, '../../src');
 const DIST_PATH = path.resolve(__dirname, '../../build');
 const PUBLIC_PATH = path.resolve(__dirname, '../../public');
 
-module.exports = {
+module.exports = (env) => ({
   context: __dirname,
   entry: path.join(SRC_PATH, "index.js"),
   output: {
@@ -81,6 +81,6 @@ module.exports = {
       inject: 'body',
       template: path.resolve(PUBLIC_PATH, 'index.html'),
     }),
-    new BundleAnalyzerPlugin({ analyzerMode: 'disabled' }),
+    new BundleAnalyzerPlugin({ analyzerMode: env.analyze ? 'server' : 'disabled' }),
   ]
-};
+});

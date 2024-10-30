@@ -15,6 +15,7 @@
     "@types/react-dom": "^18.0.0",
     "preact": "^10.24.3",
     "preact-iso": "^2.8.1",
+    "react-responsive-modal": "^6.4.2",
     "typescript": "^4.4.2"
   },
   "devDependencies": {
