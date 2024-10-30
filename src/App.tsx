@@ -6,14 +6,7 @@ import { AppContext } from './utils/context';
 import { getContextDataFromLocalstorage, storeContextDataToLocalstorage } from './utils/app.utils';
 import { IContextState } from './app';
 import { DefaultContextData } from './constants/app.constants';
-import styled from 'styled-components';
-
-const AppContainer = styled.div`
-  min-height: 100vh;
-  background-image: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%);
-  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
-  font-family: "Courier Prime", monospace;
-`;
+import './App.css';
 
 function App() {
   const [contextState, setContextState] = useState<IContextState>({
@@ -34,7 +27,7 @@ function App() {
 
   return (
     <AppContext.Provider value={{contextState, updateContext}}>
-      <AppContainer>
+      <div className="app-container">
         <Nav />
         <LocationProvider>
           <Router>
@@ -43,7 +36,7 @@ function App() {
             ))}
           </Router>
         </LocationProvider>
-      </AppContainer>
+      </div>
     </AppContext.Provider>
   );
 }
