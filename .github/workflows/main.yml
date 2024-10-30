@@ -10,6 +10,10 @@ jobs:
     name: Deploy
     steps:
       - uses: actions/checkout@v4
+      - name: Install
+        run: corepack enable pnpm && pnpm install
+      - name: Build
+        run: npm run build
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
