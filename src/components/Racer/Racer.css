@@ -1,0 +1,15 @@
+.text-viewer-container {
+    padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    text-transform: capitalize;
+    font-family: "Courier Prime", monospace;
+    font-size: 2rem;
+    background: #C5CAE9;
+
+}
+@media (max-width: 768px) {
+    .text-viewer-container {
+        font-size: 1.5rem;
+    }
+}

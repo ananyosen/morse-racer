@@ -1,20 +1,6 @@
 import React from 'react';
 import { ITextViewerProps } from '../Racer.interfaces';
-import styled from 'styled-components';
-
-const TextViewerContainer = styled.div`
-    padding: 1rem;
-    width: 100%;
-    box-sizing: border-box;
-    text-transform: capitalize;
-    font-family: "Courier Prime", monospace;
-    font-size: 2rem;
-    background: #C5CAE9;
-
-    @media (max-width: 768px) {
-        font-size: 1.5rem;
-    }
-`;
+import '../Racer.css';
 
 const TextViewer: React.FC<ITextViewerProps> = (props) => {
     const {
@@ -24,7 +10,7 @@ const TextViewer: React.FC<ITextViewerProps> = (props) => {
     } = props;
 
     return (
-        <TextViewerContainer>
+        <div className="text-viewer-container">
             {characters.map((char, index) => (
                 <div
                     style={{
@@ -40,7 +26,7 @@ const TextViewer: React.FC<ITextViewerProps> = (props) => {
                     <span>{char}</span>
                 </div>
             ))}
-        </TextViewerContainer>
+        </div>
     )
 };
 
