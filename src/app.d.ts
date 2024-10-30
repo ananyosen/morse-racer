@@ -12,6 +12,11 @@ export interface IAppContext {
     updateContext?: (updatedData: Partial<IContextState>) => void;
 }
 
+export interface IRouteObject {
+    path: string;
+    Component: React.FunctionComponent;
+}
+
 
 declare global {
     interface Window {

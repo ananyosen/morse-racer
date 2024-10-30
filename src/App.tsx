@@ -1,8 +1,5 @@
-import React, { useCallback, useState } from 'react';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from 'react-router-dom';
+import { useCallback, useState } from 'react';
+import { LocationProvider, ErrorBoundary, Router, Route } from 'preact-iso';
 import routes from './routes';
 import Nav from './components/Nav';
 import { AppContext } from './utils/context';
@@ -10,8 +7,6 @@ import { getContextDataFromLocalstorage, storeContextDataToLocalstorage } from '
 import { IContextState } from './app';
 import { DefaultContextData } from './constants/app.constants';
 import styled from 'styled-components';
-
-const router = createBrowserRouter(routes);
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -41,9 +36,13 @@ function App() {
     <AppContext.Provider value={{contextState, updateContext}}>
       <AppContainer>
         <Nav />
-        <React.Suspense fallback={null}>
-          <RouterProvider router={router} />
-        </React.Suspense>
+        <LocationProvider>
+          <Router>
+            {routes.map(({ path, Component }) => (
+              <Route path={path} component={Component} key={path} />
+            ))}
+          </Router>
+        </LocationProvider>
       </AppContainer>
     </AppContext.Provider>
   );
