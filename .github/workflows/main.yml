@@ -10,7 +10,7 @@ jobs:
     name: Deploy
     steps:
       - uses: actions/checkout@v4
-      - name: Install
+      - name: Install Deps
         run: corepack enable pnpm && pnpm install
       - name: Build
         run: npm run build
